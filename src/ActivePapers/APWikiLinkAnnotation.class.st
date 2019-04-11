@@ -1,3 +1,8 @@
+"
+!Wiki links
+
+This class represents annotations in parsed Pillar documents whose tag is ==wikiPage==. They are useful only in the pages of a wiki managed by trait ${class:name=TAPWiki}$.
+"
 Class {
 	#name : #APWikiLinkAnnotation,
 	#superclass : #GtAnnotation,
