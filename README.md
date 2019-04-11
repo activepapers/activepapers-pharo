@@ -1,4 +1,4 @@
-# activepapers-pharo
+# The ActivePapers Pharo edition
 
 The Pharo edition of [ActivePapers](https://www.activepapers.org/) focuses on the documentation and user interface aspects of communicating computational science. It is based on the [Glamorous Toolkit](https://gtoolkit.com/), an innovative development environment for [Pharo](http://pharo.org/).
 
