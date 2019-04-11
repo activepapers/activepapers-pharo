@@ -13,15 +13,15 @@ TAPWiki classSide >> createOrRetrieveWikiPageNamed: aSymbol [
 ]
 
 { #category : #inspecting }
-TAPWiki classSide >> gtDocumentFor: aView [
-	"<gtView> is inherited from the overriden implementation in Class"
+TAPWiki classSide >> gtMainPageFor: aView [
+	<gtView>
 	| aDocument |
 	aDocument := GtDocument new
 							strategy: (APWikiPageStorageStrategy new container: self; name: #Main);
 							read.
 	^ (aDocument gtTextFor: aView)
 		title: 'Main page';
-		priority: -1;
+		priority: -10;
 		action: [ :anAction | 
 			aDocument gtSaveActionFor: anAction ];
 		action: [ :anAction | 
@@ -33,7 +33,7 @@ TAPWiki classSide >> gtPagesFor: aView [
 	<gtView>
 	^ aView list
 		title: 'Pages' translated;
-		priority: 0;
+		priority: -9;
 		items: [ self wikiPageNames collect: [ :pn | self wikiPageNamed: pn ] ];
 		itemFormat: [ :page | page name ]
 ]
