@@ -44,7 +44,7 @@ BaselineOfActivePapers class >> wikiPageWikiImplementation [
 		text: 
 '!Wiki implementation
 
-- The trait ${class:name=TAPWiki}$ provides methods that generate the views for the main page (${method:name=TAPWiki>>#gtMainPageFor:}$) and for the page list (${method:name=TAPWiki>>#gtPagesFor:}$). Further methods serve to create, retrieve, and remove wiki pages. Display and editing of the Pillar code is handled by ${class:name=GtDocument}$.
+- The trait ${class:name=TAPWiki}$ provides methods that generate the views for the main page (${method:name=TAPWiki class>>#gtMainPageFor:}$) and for the page list (${method:name=TAPWiki class>>#gtPagesFor:}$). Further methods serve to create, retrieve, and remove wiki pages. Display and editing of the Pillar code is handled by ${class:name=GtDocument}$.
 
 - The class ${class:name=APWikiPage}$ serves for displaying and editing pages other than the main page.
 
