@@ -1,6 +1,8 @@
 Class {
 	#name : #BaselineOfActivePapers,
 	#superclass : #BaselineOf,
+	#traits : 'TAPWiki',
+	#classTraits : 'TAPWiki classTrait',
 	#category : #BaselineOfActivePapers
 }
 
