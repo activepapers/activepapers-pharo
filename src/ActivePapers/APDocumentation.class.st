@@ -13,7 +13,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TAPWiki',
 	#classTraits : 'TAPWiki classTrait',
-	#category : #ActivePapers
+	#category : #'ActivePapers-Documentation'
 }
 
 { #category : #wikiPages }

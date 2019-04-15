@@ -21,8 +21,12 @@ BaselineOfActivePapers >> baseline: spec [
 			with: [ spec repository: 'github://feenkcom/gtoolkit/src' ].
 
 		spec
+			baseline: 'ObservableSlot'
+			with: [ spec repository: 'github://guillep/ObservableSlots/src' ].
+
+		spec
 			package: 'ActivePapers'
-			with: [ spec requires: #('GToolkit')];
+			with: [ spec requires: #('GToolkit' 'ObservableSlot')];
 			package: 'BaselineOfActivePapers'.
 
 ]
