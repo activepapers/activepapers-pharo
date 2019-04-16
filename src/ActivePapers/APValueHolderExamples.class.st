@@ -8,10 +8,13 @@ An optional name can be defined:
 ${method:name=APValueHolderExamples>>#emptyNamedValueHolder|expanded=}$
 
 The value can be set:
-${method:name=APValueHolderExamples>>#valueHolderWithValue|expanded=}$
+${method:name=APValueHolderExamples>>#valueHolderWithNonValidatedValue|expanded=}$
 
-The value can also be invalidated:
-${method:name=APValueHolderExamples>>#invalidatedValueHolderWithValue|expanded=}$
+And then validated:
+${method:name=APValueHolderExamples>>#valueHolderWithValidatedValue|expanded=}$
+
+And then invalidated again:
+${method:name=APValueHolderExamples>>#valueHolderWithInvalidatedValue|expanded=}$
 
 Read and write accesses can be tracked:
 ${method:name=APValueHolderExamples>>#valueHolderWithReadAnnouncements|expanded=}$
@@ -50,17 +53,6 @@ APValueHolderExamples >> emptyValueHolder [
 ]
 
 { #category : #examples }
-APValueHolderExamples >> invalidatedValueHolderWithValue [
-	| valueHolder |
-	<gtExample>
-	valueHolder := self valueHolderWithValue.
-	valueHolder invalidate.
-	self assert: valueHolder isValid not.
-	^ valueHolder
-
-]
-
-{ #category : #examples }
 APValueHolderExamples >> valueHolderName [
 	^ 'aValueHolder'
 
@@ -80,7 +72,7 @@ APValueHolderExamples >> valueHolderValue [
 APValueHolderExamples >> valueHolderWithChangeAnnouncements [
 	| valueHolder fired newValue oldValue announcement |
 	<gtExample>
-	valueHolder := self valueHolderWithValue.
+	valueHolder := self valueHolderWithValidatedValue.
 	valueHolder whenChangedDo: [ fired := true ].
 
 	"Setting a new value causes a change announcement"
@@ -118,10 +110,34 @@ APValueHolderExamples >> valueHolderWithChangeAnnouncements [
 ]
 
 { #category : #examples }
+APValueHolderExamples >> valueHolderWithInvalidatedValue [
+	| valueHolder |
+	<gtExample>
+	valueHolder := self valueHolderWithValidatedValue.
+	valueHolder invalidate.
+	self assert: valueHolder isValid not.
+	^ valueHolder
+
+]
+
+{ #category : #examples }
+APValueHolderExamples >> valueHolderWithNonValidatedValue [
+	| valueHolder |
+	<gtExample>
+	valueHolder := self emptyNamedValueHolder.
+	valueHolder value: self valueHolderValue.
+	self assert: valueHolder value equals: self valueHolderValue.
+	self assert: valueHolder isValid not.
+	self assert: valueHolder timeStamp isNil.
+	^ valueHolder
+
+]
+
+{ #category : #examples }
 APValueHolderExamples >> valueHolderWithReadAnnouncements [
 	| valueHolder fired heldValue sentAnnouncement |
 	<gtExample>
-	valueHolder := self valueHolderWithValue.
+	valueHolder := self valueHolderWithValidatedValue.
 
 	"Read access can be tracked"
 	fired := false.
@@ -147,11 +163,11 @@ APValueHolderExamples >> valueHolderWithReadAnnouncements [
 ]
 
 { #category : #examples }
-APValueHolderExamples >> valueHolderWithValue [
+APValueHolderExamples >> valueHolderWithValidatedValue [
 	| valueHolder |
 	<gtExample>
-	valueHolder := self emptyNamedValueHolder.
-	valueHolder value: self valueHolderValue.
+	valueHolder := self valueHolderWithNonValidatedValue.
+	valueHolder validate.
 	self assert: valueHolder isValid.
 	self assert: valueHolder value equals: self valueHolderValue.
 	self assert: (valueHolder timeStamp isKindOf: DateAndTime).

@@ -10,6 +10,14 @@ Class {
 	#category : #'ActivePapers-DataSlots'
 }
 
+{ #category : #'code generation' }
+APDataSlot >> emitStore: aMethodBuilder [
+	super emitStore: aMethodBuilder.
+	"Push the value holder to the stack, then send unary message"
+	aMethodBuilder pushInstVar: index.
+	aMethodBuilder send: #validate.
+]
+
 { #category : #initialization }
 APDataSlot >> initialize: anObject [
 

@@ -86,17 +86,16 @@ APValueHolder >> timeStamp [
 ]
 
 { #category : #accessing }
+APValueHolder >> validate [
+	valid := true.
+	timeStamp := DateAndTime now
+]
+
+{ #category : #accessing }
 APValueHolder >> value [
 
 	self valueRead.
 	^ value
-]
-
-{ #category : #accessing }
-APValueHolder >> value: anObject [
-	super value: anObject.
-	valid := true.
-	timeStamp := DateAndTime now
 ]
 
 { #category : #accessing }
