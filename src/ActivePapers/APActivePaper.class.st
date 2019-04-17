@@ -111,7 +111,7 @@ APActivePaper class >> datasets [
 ]
 
 { #category : #inspecting }
-APActivePaper class >> gtActionScriptPageFor: anAction [
+APActivePaper class >> gtActionPlayPageFor: anAction [
 	<gtAction>
 	^ anAction button
 			icon: BrGlamorousIcons fromhere;
