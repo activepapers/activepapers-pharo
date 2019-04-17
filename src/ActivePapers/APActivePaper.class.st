@@ -111,6 +111,20 @@ APActivePaper class >> datasets [
 ]
 
 { #category : #inspecting }
+APActivePaper class >> gtActionScriptPageFor: anAction [
+	<gtAction>
+	^ anAction button
+			icon: BrGlamorousIcons fromhere;
+			priority: 30;
+			action:
+				[ :aButton |
+					aButton fireEvent: (GtPhlowObjectToSpawn new
+					object: (APPlayPage forObject: self uniqueInstance);
+					sourceElement: aButton) ].
+
+]
+
+{ #category : #inspecting }
 APActivePaper class >> gtWorkflowViewFor: aView [
 	<gtView>
 	^ aView mondrian
