@@ -125,6 +125,15 @@ APActivePaper class >> gtActionPlayPageFor: anAction [
 ]
 
 { #category : #inspecting }
+APActivePaper class >> gtScriptsFor: aView [
+	<gtView>
+	^ aView explicit
+		title: 'Scripts' translated;
+		priority: -3;
+		stencil: [ (APScriptMethodsCoder forPaper: self) asElement ]
+]
+
+{ #category : #inspecting }
 APActivePaper class >> gtWorkflowViewFor: aView [
 	<gtView>
 	^ aView mondrian
