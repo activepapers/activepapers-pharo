@@ -1,3 +1,8 @@
+"
+!Script snippet in an ActivePapers playground
+
+When an ${class:name=APCoderSnippet}$ is converted to a script, it is replaced by an APScriptSnippet, which handles the code transformation.
+"
 Class {
 	#name : #APScriptSnippet,
 	#superclass : #GtExampleSnippet,

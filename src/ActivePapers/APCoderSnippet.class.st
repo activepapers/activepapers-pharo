@@ -1,3 +1,8 @@
+"
+!Code snippet in an ActivePapers playground
+
+A modified version of ${class:name=GtCoderSnippet}$ for use by ${class:name=APPlayPage}$. Removes the ""eg"" button (which is not useful in this context) and adds a button for converting the snippet into a script represented by a ${class:name=APScriptSnippet}$.
+"
 Class {
 	#name : #APCoderSnippet,
 	#superclass : #GtCoderSnippet,
