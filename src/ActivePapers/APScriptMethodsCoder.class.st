@@ -15,3 +15,12 @@ APScriptMethodsCoder class >> forPaper: anAPActivePaper [
 APScriptMethodsCoder >> forPaper: anAPActivePaper [
 	super forMethods: anAPActivePaper scripts values
 ]
+
+{ #category : #private }
+APScriptMethodsCoder >> newMethodCoderFor: aMethod [
+	| coder |
+	coder := APScriptMethodCoder forMethod: aMethod.
+	coder methodsCoder: self.
+	coder expanded: true.
+	^ coder
+]

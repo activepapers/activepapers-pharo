@@ -189,7 +189,7 @@ APActivePaper class >> roundedBoxAround: aBlElement [
 
 ]
 
-{ #category : #dependencies }
+{ #category : #workflow }
 APActivePaper class >> scripts [
 	| scripts uncomputedDatasets computedUndeclaredDatasets |
 	scripts := Dictionary new.
