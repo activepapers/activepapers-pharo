@@ -13,7 +13,10 @@ APScriptMethodsCoder class >> forPaper: anAPActivePaper [
 
 { #category : #initialization }
 APScriptMethodsCoder >> forPaper: anAPActivePaper [
-	super forMethods: anAPActivePaper scripts values
+	| scripts |
+	scripts := anAPActivePaper scripts values.
+	scripts sort: [ :a :b | a selector <= b selector ].
+	super forMethods: scripts
 ]
 
 { #category : #private }
