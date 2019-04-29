@@ -81,8 +81,6 @@ APActivePaperTest >> testErrorUndeclaredComputedVar [
 { #category : #testing }
 APActivePaperTest >> testInstVarAndScriptCreation [
 	activePaper addInstVarNamed: 'x'.
-	self assert: (activePaper slotNamed: #x) isObservableSlot.
-	self assert: ((activePaperInstance observablePropertyNamed: #x) isKindOf: APValueHolder).
 	self assert: activePaper workflowMethods isEmpty.
 	self assert: (activePaper methods select: [ :each | each protocol = 'generated']) size equals: 1.
 	"There is no method for computing x, so access to x is an error."

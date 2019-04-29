@@ -43,10 +43,11 @@ APActivePaperExample removeFromSystem.
 Class {
 	#name : #APActivePaper,
 	#superclass : #Object,
-	#traits : 'TAPOldData + TAPWiki + TSingleton',
-	#classTraits : 'TAPOldData classTrait + TAPWiki classTrait + TSingleton classTrait',
+	#traits : 'TAPWiki + TSingleton',
+	#classTraits : 'TAPWiki classTrait + TSingleton classTrait',
 	#instVars : [
-		'datasetDependencies'
+		'datasetDependencies',
+		'timeStamps'
 	],
 	#category : #'ActivePapers-ComputationalDocument'
 }
@@ -69,15 +70,13 @@ APActivePaper class >> addInstVarNamed: aString [
 	newInstVarNames do: [ :each |
 		| varSymbol |
 		varSymbol := each asSymbol.
-		self addSlot: (APOldDataSlot named: varSymbol).
+		self addSlot: (APDataSlot named: varSymbol).
 		self compile: each , ' self ensureDataset: #', each, '. ^ ', each classified: 'generated' ].
 
-	"Invalidate cached state and put the new slot(s) under observation"
+	"Invalidate cached state in instances"
 	self allInstancesDo:
 		[ :each |
-			self initializeSlots: each.
-			each clearCachedState.
-			each observeAllDataSlots ].
+			each clearCachedState ].
 
 ]
 
@@ -97,16 +96,21 @@ APActivePaper class >> dataSlotNames [
 
 { #category : #workflow }
 APActivePaper class >> dataSlots [
-	^ self slots select: [ :s | s isKindOf: APOldDataSlot ]
+	^ self slots select: [ :s | s isKindOf: APDataSlot ]
 ]
 
 { #category : #workflow }
 APActivePaper class >> datasets [
-	"Return a dictionary mapping dataset names to corresponding APValueHolders"
+	"Return a dictionary  mapping dataset names to APDataset objects"
 	| instance datasets |
 	instance := self uniqueInstance.
 	datasets := Dictionary new.
-	self dataSlots do: [ :s | datasets at: s name put: (s rawRead: instance) ].
+	self dataSlots do:
+		[ :s | datasets at: s name
+							 put: (APDataset new
+										name: s name;
+										value: (s read: instance);
+										timeStamp: (instance timeStampForDataset: s name)) ].
 	^ datasets
 ]
 
@@ -310,14 +314,14 @@ APActivePaper >> authorizeChangeOfDataset: aSymbol [
 	variables := self datasetsComputedInCurrentContext.
 	variables ifEmpty: [ ^ self ].
 	self assert: (variables includesKey: aSymbol)
-		  description: 'Unauthorized attempt to modify variable ' , aSymbol asString.
+		  description: 'Unauthorized attempt to modify variable ' , aSymbol.
 
 ]
 
-{ #category : #dependencies }
+{ #category : #initialization }
 APActivePaper >> clearCachedState [
 	datasetDependencies := Dictionary new.
-
+	timeStamps := Dictionary new.
 ]
 
 { #category : #dependencies }
@@ -349,7 +353,8 @@ APActivePaper >> datasetsComputedInCurrentContext [
 { #category : #computation }
 APActivePaper >> ensureDataset: aSymbol [
 	"If the slot holds a valid value, do nothing."
-	(self valueHolderForSlot: aSymbol) isValid ifTrue: [ ^ self ]. 
+	(self isValidDataset: aSymbol) ifTrue: [ ^ self ].
+	"Otherwise, run the script that computes the value."
 	(self class scripts at: aSymbol)
 		valueWithReceiver: self arguments: Array new
 
@@ -358,31 +363,35 @@ APActivePaper >> ensureDataset: aSymbol [
 { #category : #initialization }
 APActivePaper >> initialize [
 	super initialize.
-	self class initializeSlots: self.
-	self observeAllDataSlots.
 	self clearCachedState.
 
 ]
 
 { #category : #'data access' }
 APActivePaper >> isValidDataset: aSymbol [
-	^ (self valueHolderForSlot: aSymbol) isValid
+	^ timeStamps includesKey: aSymbol.
+
 ]
 
 { #category : #'data access' }
-APActivePaper >> observeAllDataSlots [
-	self class dataSlots do:
-		[ :slot | self observeDataSlot: slot name ]
-]
+APActivePaper >> readAccessToSlot: aSlot [
+	| slotName variables |
+	slotName := aSlot name.
+	variables := self datasetsComputedInCurrentContext.
+	variables ifEmpty: [ ^ self ].
+	"Read access by the defining method requires no action."
+	variables at: slotName ifPresent: [ :level | level = 1 ifTrue: [ ^ self ] ].
+	"If the defining method is in the list, but not in the first place, there is
+	 a cycle in the data dependency graph."
+	self assert: (variables includesKey: slotName) not
+		  description: 'Cyclic data dependency:',
+							slotName,
+							' -> ',
+							(' -> ' join: variables keys).
+	"Otherwise, record a dependency for variable being computed."
+	variables keysAndValuesDo:
+		[ :v :l | l = 1 ifTrue: [ self record: slotName asDependencyOf: v ] ]
 
-{ #category : #'data access' }
-APActivePaper >> observeDataSlot: aSymbol [
-	self property: aSymbol
-		  whenReadDo:
-				[ self recordReadAccessToDataset: aSymbol ].
-	self property: aSymbol
-		  whenChangedDo:
-				[ :value | self authorizeChangeOfDataset: aSymbol ]
 ]
 
 { #category : #dependencies }
@@ -392,31 +401,13 @@ APActivePaper >> record: aVariable asDependencyOf: dependentVariable [
 ]
 
 { #category : #'data access' }
-APActivePaper >> recordReadAccessToDataset: aSymbol [
-	| variables |
-	variables := self datasetsComputedInCurrentContext.
-	variables ifEmpty: [ ^ self ].
-	"Read access by the defining method requires no action."
-	variables at: aSymbol ifPresent: [ :level | level = 1 ifTrue: [ ^ self ] ].
-	"If the defining method is in the list, but not in the first place, there is
-	 a cycle in the data dependency graph."
-	self assert: (variables includesKey: aSymbol) not
-		  description: 'Cyclic data dependency:',
-							aSymbol,
-							' -> ',
-							(' -> ' join: variables keys).
-	"Otherwise, record a dependency for variable being computed."
-	variables keysAndValuesDo:
-		[ :v :l | l = 1 ifTrue: [ self record: aSymbol asDependencyOf: v ] ]
-	
-]
-
-{ #category : #'data access' }
 APActivePaper >> timeStampForDataset: aSymbol [
-	^ (self valueHolderForSlot: aSymbol) timestamp
+	^ timeStamps at: aSymbol ifAbsent: [ nil ]
+
 ]
 
 { #category : #'data access' }
-APActivePaper >> valueHolderForSlot: aSymbol [
-	^ (self class slotNamed: aSymbol) rawRead: self
+APActivePaper >> writeAccessToSlot: aSlot [
+	self authorizeChangeOfDataset: aSlot name.
+	timeStamps at: aSlot name put: DateAndTime now.
 ]
