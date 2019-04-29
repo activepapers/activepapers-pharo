@@ -13,7 +13,7 @@ Class {
 		'valid',
 		'timeStamp'
 	],
-	#category : #'ActivePapers-DataSlots'
+	#category : #'ActivePapers-OldDataSlots'
 }
 
 { #category : #inspecting }

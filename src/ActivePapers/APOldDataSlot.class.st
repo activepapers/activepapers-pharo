@@ -5,13 +5,13 @@ This is a minor modification of ${class:name=ObservableSlot}$ that uses an ${cla
 
 "
 Class {
-	#name : #APDataSlot,
+	#name : #APOldDataSlot,
 	#superclass : #ObservableSlot,
-	#category : #'ActivePapers-DataSlots'
+	#category : #'ActivePapers-OldDataSlots'
 }
 
 { #category : #'code generation' }
-APDataSlot >> emitStore: aMethodBuilder [
+APOldDataSlot >> emitStore: aMethodBuilder [
 	super emitStore: aMethodBuilder.
 	"Push the value holder to the stack, then send unary message"
 	aMethodBuilder pushInstVar: index.
@@ -19,7 +19,7 @@ APDataSlot >> emitStore: aMethodBuilder [
 ]
 
 { #category : #initialization }
-APDataSlot >> initialize: anObject [
+APOldDataSlot >> initialize: anObject [
 
 	(self rawRead: anObject)
 		ifNil: [self rawWrite: (APValueHolder new name: name) to: anObject]

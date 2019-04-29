@@ -43,8 +43,8 @@ APActivePaperExample removeFromSystem.
 Class {
 	#name : #APActivePaper,
 	#superclass : #Object,
-	#traits : 'TAPData + TAPWiki + TSingleton',
-	#classTraits : 'TAPData classTrait + TAPWiki classTrait + TSingleton classTrait',
+	#traits : 'TAPOldData + TAPWiki + TSingleton',
+	#classTraits : 'TAPOldData classTrait + TAPWiki classTrait + TSingleton classTrait',
 	#instVars : [
 		'datasetDependencies'
 	],
@@ -69,7 +69,7 @@ APActivePaper class >> addInstVarNamed: aString [
 	newInstVarNames do: [ :each |
 		| varSymbol |
 		varSymbol := each asSymbol.
-		self addSlot: (APDataSlot named: varSymbol).
+		self addSlot: (APOldDataSlot named: varSymbol).
 		self compile: each , ' self ensureDataset: #', each, '. ^ ', each classified: 'generated' ].
 
 	"Invalidate cached state and put the new slot(s) under observation"
@@ -97,7 +97,7 @@ APActivePaper class >> dataSlotNames [
 
 { #category : #workflow }
 APActivePaper class >> dataSlots [
-	^ self slots select: [ :s | s isKindOf: APDataSlot ]
+	^ self slots select: [ :s | s isKindOf: APOldDataSlot ]
 ]
 
 { #category : #workflow }

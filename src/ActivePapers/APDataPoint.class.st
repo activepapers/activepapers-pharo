@@ -1,10 +1,10 @@
 Class {
 	#name : #APDataPoint,
 	#superclass : #Object,
-	#traits : 'TAPData',
-	#classTraits : 'TAPData classTrait',
+	#traits : 'TAPOldData',
+	#classTraits : 'TAPOldData classTrait',
 	#instVars : [
-		'#x => APDataSlot',
+		'#x => APOldDataSlot',
 		'#y'
 	],
 	#category : #'ActivePapers-Tests'
