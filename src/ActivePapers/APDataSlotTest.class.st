@@ -27,3 +27,14 @@ APDataSlotTest >> testAccessCounts [
 	self assert: point writeAccessCount equals: 2.
 
 ]
+
+{ #category : #tests }
+APDataSlotTest >> testValues [
+	point x: 1.
+	self assert: (point instVarNamed: #x) equals: 1.
+	self assert: point x equals: 1.
+	point y: 2.
+	self assert: (point instVarNamed: #y) equals: 2.
+	self assert: point y equals: 2.
+
+]
