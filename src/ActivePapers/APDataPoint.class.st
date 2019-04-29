@@ -1,11 +1,11 @@
 Class {
 	#name : #APDataPoint,
 	#superclass : #Object,
-	#traits : 'TAPOldData',
-	#classTraits : 'TAPOldData classTrait',
 	#instVars : [
-		'#x => APOldDataSlot',
-		'#y'
+		'#x => APDataSlot',
+		'#y',
+		'#readAccessCount',
+		'#writeAccessCount'
 	],
 	#category : #'ActivePapers-Tests'
 }
@@ -13,7 +13,30 @@ Class {
 { #category : #initialization }
 APDataPoint >> initialize [
 	super initialize.
-	self class initializeSlots: self.
+	readAccessCount := 0.
+	writeAccessCount := 0.
+]
+
+{ #category : #accessing }
+APDataPoint >> readAccessCount [
+	^ readAccessCount
+]
+
+{ #category : #'slot access' }
+APDataPoint >> readAccessToSlot: aSlot [
+	self assert: aSlot name = #x.
+	readAccessCount := readAccessCount + 1.
+]
+
+{ #category : #accessing }
+APDataPoint >> writeAccessCount [
+	^ writeAccessCount
+]
+
+{ #category : #'slot access' }
+APDataPoint >> writeAccessToSlot: aSlot [
+	self assert: aSlot name = #x.
+	writeAccessCount := writeAccessCount + 1.
 ]
 
 { #category : #accessing }

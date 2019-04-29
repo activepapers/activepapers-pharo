@@ -12,71 +12,18 @@ APDataSlotTest >> setUp [
 ]
 
 { #category : #tests }
-APDataSlotTest >> testDoubleInitializationDoesNotEraseValues [
-	point x: 5.
+APDataSlotTest >> testAccessCounts [
+	point x: 1.
+	point x: 1.
 	point y: 2.
-	point class initializeSlots: point.
-	self assert: point x equals: 5.
-	self assert: point y equals: 2.
-
-]
-
-{ #category : #tests }
-APDataSlotTest >> testExplicitReadNotificationRaisesEventExactlyOnce [
-
-	| count |
-	count := 0.
-	point property: #x whenReadDo: [ count := count + 1 ].
-
-	point notifyPropertyRead: #x.
-
-	self assert: count equals: 1.
-]
-
-{ #category : #tests }
-APDataSlotTest >> testExplicitReadNotificationRaisesEventWithCurrentValue [
-
-	| currentValue |
-	point x: 17.
-	point property: #x whenReadDo: [ :v | currentValue := v ].
-
-	point notifyPropertyRead: #x.
-
-	self assert: currentValue equals: 17.
-]
-
-{ #category : #tests }
-APDataSlotTest >> testInstanceVariableAccessRaisesEventExactlyOnce [
-
-	|  count |
-	count := 0.
-	point property: #x whenReadDo: [ count := count + 1 ].
-
+	point y: 2.
 	point x.
-
-	self assert: count equals: 1.
-]
-
-{ #category : #tests }
-APDataSlotTest >> testSubscribeToReadRaisesEventWithCurrentValue [
-
-	| currentValue |
-	point x: 17.
-
-	point property: #x whenReadDo: [ :v | currentValue := v ].
-
 	point x.
+	point x.
+	point y.
+	point y.
+	point y.
+	self assert: point readAccessCount equals: 3.
+	self assert: point writeAccessCount equals: 2.
 
-	self assert: currentValue equals: 17.
-]
-
-{ #category : #tests }
-APDataSlotTest >> testSubscribeToReadUnexistentPropertyRaisesError [
-
-	self
-		should: [
-			point
-				property: #z
-				whenReadDo: [ self fail: 'This event should''nt have been subscribed at all' ] ]
-		raise: SlotNotFound
 ]
