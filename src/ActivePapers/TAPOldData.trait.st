@@ -5,20 +5,20 @@ This is an extension of ${class:name=TObservable}$ that adds two methods for tra
 
 "
 Trait {
-	#name : #TAPData,
+	#name : #TAPOldData,
 	#traits : 'TObservable',
 	#classTraits : 'TObservable classTrait',
-	#category : #'ActivePapers-DataSlots'
+	#category : #'ActivePapers-OldDataSlots'
 }
 
 { #category : #events }
-TAPData >> notifyPropertyRead: aName [
+TAPOldData >> notifyPropertyRead: aName [
 
 	(self observablePropertyNamed: aName) valueRead
 ]
 
 { #category : #events }
-TAPData >> property: aName whenReadDo: aBlockClosure [ 
+TAPOldData >> property: aName whenReadDo: aBlockClosure [ 
 	
 	"Obtain the raw value.
 	We need to access the underlying value holder to subscribe to it"

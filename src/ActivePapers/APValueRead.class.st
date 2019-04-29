@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'value'
 	],
-	#category : #'ActivePapers-DataSlots'
+	#category : #'ActivePapers-OldDataSlots'
 }
 
 { #category : #'instance creation' }
