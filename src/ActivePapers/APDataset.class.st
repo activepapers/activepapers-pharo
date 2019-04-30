@@ -1,3 +1,9 @@
+"
+!Dataset in an ActivePaper
+
+Instances of this class is used for displaying individual datasets when inspecting an ${class:name=APActivePaper}$.
+
+"
 Class {
 	#name : #APDataset,
 	#superclass : #Object,

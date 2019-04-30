@@ -3,7 +3,7 @@
 
 An ActivePaper is a computational document combining a workflow (a collection of scripts and datasets) with a documentation layer provided by ${class:name=TAPWiki}$.
 
-Every instance variable of an ActivePaper is an ${class:name=APDataSlot}$ storing a dataset via a ${class:name=APValueHolder}$. Each such dataset is computed by one (and only one) script. Scripts are methods that contain pragmas of the form ==<computes: #x>== to signal that they compute dataset ==x==.
+Every instance variable of an ActivePaper is an ${class:name=APDataSlot}$ storing a dataset. Each such dataset is computed by one (and only one) script. Scripts are methods that contain pragmas of the form ==<computes: #x>== to signal that they compute dataset ==x==.
 The following script creates a short example document for experimentation:
 
 [[[
