@@ -21,6 +21,7 @@ APDataSlot >> emitStore: aMethodBuilder [
 		pushReceiver;
 		pushLiteralVariable: #slot -> self;
 		send: #writeAccessToSlot:;
+		popTop;
 		pushTemp: tempName.
 	super emitStore: aMethodBuilder
 ]
@@ -30,6 +31,7 @@ APDataSlot >> emitValue: aMethodBuilder [
 	aMethodBuilder
 		pushReceiver;
 		pushLiteralVariable: #slot -> self;
-		send: #readAccessToSlot:.	
+		send: #readAccessToSlot:;
+		popTop.
 	super emitValue: aMethodBuilder.
 ]
