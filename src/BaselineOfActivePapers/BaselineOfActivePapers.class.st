@@ -21,16 +21,12 @@ BaselineOfActivePapers >> baseline: spec [
 			with: [ spec repository: 'github://feenkcom/gtoolkit/src' ].
 
 		spec
-			baseline: 'ObservableSlot'
-			with: [ spec repository: 'github://guillep/ObservableSlots/src' ].
-
-		spec
 			baseline: 'SingletonTrait'
 			with: [ spec repository: 'github://khinsen/SingletonTrait' ].
 
 		spec
 			package: 'ActivePapers'
-			with: [ spec requires: #('GToolkit' 'ObservableSlot' 'SingletonTrait')];
+			with: [ spec requires: #('GToolkit' 'SingletonTrait')];
 			package: 'BaselineOfActivePapers'.
 
 ]
