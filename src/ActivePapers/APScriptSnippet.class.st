@@ -23,5 +23,6 @@ APScriptSnippet >> updateForCodeSnippet: sourceCode inClass: aClass [
 ', indentedLines.
 	coder 
 		forClass: aClass 
-		source: methodSource
+		source: methodSource.
+	coder category: 'scripts'
 ]
