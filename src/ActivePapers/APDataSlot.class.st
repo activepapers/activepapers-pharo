@@ -1,3 +1,9 @@
+"
+!A slot for datasets in ActivePapers
+
+This is a modification of ${class:name=InstanceVariableSlot}$ that extends the methods ${method:name=APDataSlot>>#emitStore:}$ and ${method:name=APDataSlot>>#emitValue:}$ in such a way that announcement messages (==#readAccessToSlot:== and ==#writeAccessToSlot:==) are sent to the affected object before every read or write access.
+
+"
 Class {
 	#name : #APDataSlot,
 	#superclass : #InstanceVariableSlot,
