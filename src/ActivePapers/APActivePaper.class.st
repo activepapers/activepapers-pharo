@@ -380,21 +380,8 @@ APActivePaper >> isValidDataset: aSymbol [
 APActivePaper >> readAccessToSlot: aSlot [
 	| slotName variables |
 	slotName := aSlot name.
-	variables := self datasetsComputedInCurrentContext.
-	variables ifEmpty: [ ^ self ].
-	"Read access by the defining method requires no action."
-	variables at: slotName ifPresent: [ :level | level = 1 ifTrue: [ ^ self ] ].
-	"If the defining method is in the list, but not in the first place, there is
-	 a cycle in the data dependency graph."
-	self assert: (variables includesKey: slotName) not
-		  description: 'Cyclic data dependency:',
-							slotName,
-							' -> ',
-							(' -> ' join: variables keys).
-	"Otherwise, record a dependency for variable being computed."
-	variables keysAndValuesDo:
-		[ :v :l | l = 1 ifTrue: [ self record: slotName asDependencyOf: v ] ]
-
+	self trackDynamicDependenciesOn: slotName.
+	self ensureDataset: slotName
 ]
 
 { #category : #dependencies }
@@ -407,6 +394,26 @@ APActivePaper >> record: aVariable asDependencyOf: dependentVariable [
 { #category : #'data access' }
 APActivePaper >> timeStampForDataset: aSymbol [
 	^ timeStamps at: aSymbol ifAbsent: [ nil ]
+
+]
+
+{ #category : #dependencies }
+APActivePaper >> trackDynamicDependenciesOn: aSymbol [
+	| variables |
+	variables := self datasetsComputedInCurrentContext.
+	variables ifEmpty: [ ^ self ].
+	"Read access by the defining method requires no action."
+	variables at: aSymbol ifPresent: [ :level | level = 1 ifTrue: [ ^ self ] ].
+	"If the defining method is in the list, but not in the first place, there is
+	 a cycle in the data dependency graph."
+	self assert: (variables includesKey: aSymbol) not
+		  description: 'Cyclic data dependency:',
+							aSymbol,
+							' -> ',
+							(' -> ' join: variables keys).
+	"Otherwise, record a dependency for variable being computed."
+	variables keysAndValuesDo:
+		[ :v :l | l = 1 ifTrue: [ self record: aSymbol asDependencyOf: v ] ]
 
 ]
 
