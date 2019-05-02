@@ -47,7 +47,8 @@ Class {
 	#classTraits : 'TAPWiki classTrait + TSingleton classTrait',
 	#instVars : [
 		'datasetDependencies',
-		'timeStamps'
+		'timeStamps',
+		'workflowView'
 	],
 	#category : #'ActivePapers-ComputationalDocument'
 }
@@ -146,7 +147,8 @@ APActivePaper class >> gtWorkflowViewFor: aView [
 		painting:
 			[ :view |
 				self isAbstract ifFalse: [ self workflowViewFor: view ].
-				view layout custom: (GtGradVerticalDominanceTreeLayout new). ]
+				view layout custom: (GtGradVerticalDominanceTreeLayout new).
+				self uniqueInstance workflowView: view ]
 ]
 
 { #category : #testing }
@@ -322,6 +324,7 @@ APActivePaper >> authorizeChangeOfDataset: aSymbol [
 APActivePaper >> clearCachedState [
 	datasetDependencies := Dictionary new.
 	timeStamps := Dictionary new.
+	workflowView := nil.
 ]
 
 { #category : #dependencies }
@@ -397,13 +400,30 @@ APActivePaper >> readAccessToSlot: aSlot [
 { #category : #dependencies }
 APActivePaper >> record: aVariable asDependencyOf: dependentVariable [
 	(datasetDependencies at: dependentVariable ifAbsentPut: [ Set new ])
-		add: aVariable
+		add: aVariable.
+	self updateWorkflowView.
 ]
 
 { #category : #'data access' }
 APActivePaper >> timeStampForDataset: aSymbol [
 	^ timeStamps at: aSymbol ifAbsent: [ nil ]
 
+]
+
+{ #category : #dependencies }
+APActivePaper >> updateWorkflowView [
+	"workflowView asElement phlow update" 
+]
+
+{ #category : #dependencies }
+APActivePaper >> workflowView [
+	self flag: 'for testing'.
+	^ workflowView
+]
+
+{ #category : #dependencies }
+APActivePaper >> workflowView: aView [
+	workflowView := aView
 ]
 
 { #category : #'data access' }
