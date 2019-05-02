@@ -13,10 +13,13 @@ APScriptMethodsCoder class >> forPaper: anAPActivePaper [
 
 { #category : #initialization }
 APScriptMethodsCoder >> forPaper: anAPActivePaper [
-	| scripts |
-	scripts := anAPActivePaper scripts values.
-	scripts sort: [ :a :b | a selector <= b selector ].
-	super forMethods: scripts
+	| scriptMethods |
+	scriptMethods := anAPActivePaper scripts values
+	"Scripts that compute multiple datasets appear more than once in the
+	dictionary, so we convert to a set to keep only unique entries."
+										asSet asArray.
+	scriptMethods sort: [ :a :b | a selector <= b selector ].
+	super forMethods: scriptMethods
 ]
 
 { #category : #private }
