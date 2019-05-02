@@ -41,8 +41,12 @@ APScriptMethodCoder >> playAndInspectScriptFrom: anElement [
 		select: [ :p | p selector = #computes: ]
 		thenCollect: [ :p | p arguments first ].
 	datasets := self classOrMetaClass datasets.
-	datasetNames do:
-		[ :each | anElement phlow spawnObject: (datasets at: each) value ]
+	datasetNames size = 1
+		ifTrue: [ anElement phlow spawnObject:
+						(datasets at: datasetNames first) ]
+		ifFalse: [ anElement phlow spawnObject:
+						(datasetNames collect:
+								[ :each | each -> (datasets at: each)] ) asDictionary ]
 ]
 
 { #category : #executing }
