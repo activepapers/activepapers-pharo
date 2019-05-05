@@ -72,7 +72,7 @@ APActivePaper class >> addInstVarNamed: aString [
 		| varSymbol |
 		varSymbol := each asSymbol.
 		self addSlot: (APDataSlot named: varSymbol).
-		self compile: each , ' self ensureDataset: #', each, '. ^ ', each classified: 'generated' ].
+		self compile: each , ' ^ ', each classified: 'generated' ].
 
 	"Invalidate cached state in instances"
 	self allInstancesDo:
