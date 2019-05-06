@@ -153,7 +153,12 @@ APWikiLinkAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
 	"Then add styling to the page name, turning it into a link."
 	self styleLinkInText: aBlRope.
-	"Next, add the small triangle that opens the preview"
+	"Add the button representing the link."
+	(self nodeStyler: aBlRope)
+		name: (self parameters at: self constants nameParameterName);
+		spawnObject: [ self createReferencedPage ];
+		linkButton.
+	"Next, add the small triangle that opens the preview."
 	self styleExpandingPreviewInText: aBlRope.
 	"Set up reactions to changes in the system - not quite sure why this happens here!"
 	self registerToSystemChanges
@@ -161,14 +166,11 @@ APWikiLinkAnnotation >> styleTextWithMarkup: aBlRope [
 
 { #category : #'api - style' }
 APWikiLinkAnnotation >> styleTextWithoutMarkup: aBlRope [
-	"First render the full text with markup"
+	"First render the full text with markup."
 	self styleTextWithMarkup: aBlRope.
-	"The hide the markup, or not, return true if something was hidden"
-	(self utility mayHideAllButLinkInText: aBlRope forAnnotation: self)
-		"If something was hidden, make it reappear if the cursor moves nearby,
-		 by adding a BrTextCursorAttribute. This seems to take priority over
-		 the BrTextClickAttribute for the link, so a click on the link will first
-		 make the markup visible, and only a second click actually follows the link."
-		ifTrue: [ self utility styleCursorAttributeInText: aBlRope forNode: self ].
+	"Then hide the markup."
+	super styleTextWithoutMarkup: aBlRope.
+	"Make the whole annotation disappear if the cursor is far away."
+	(self nodeStyler: aBlRope) autoHideNode.
 
 ]
