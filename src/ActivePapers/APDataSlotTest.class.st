@@ -1,6 +1,9 @@
 Class {
 	#name : #APDataSlotTest,
-	#superclass : #ObservableSlotTest,
+	#superclass : #TestCase,
+	#instVars : [
+		'point'
+	],
 	#category : #'ActivePapers-Tests'
 }
 
