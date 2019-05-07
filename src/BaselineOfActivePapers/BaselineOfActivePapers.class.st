@@ -42,3 +42,10 @@ BaselineOfActivePapers >> baseline: spec [
 ]
 
 ]
+
+{ #category : #baseline }
+BaselineOfActivePapers >> postload: loader package: packageSpec [
+	"Make sure APDataPoint is compiled after APDataSlot has been loaded."
+	APDataPoint recompile.
+
+]
