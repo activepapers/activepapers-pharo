@@ -1,7 +1,7 @@
 Class {
 	#name : #APScriptMethodsCoder,
 	#superclass : #GtMethodsCoder,
-	#category : #'ActivePapers-Workflow'
+	#category : #'ActivePapers-ComputationalDocument'
 }
 
 { #category : #'instance creation' }

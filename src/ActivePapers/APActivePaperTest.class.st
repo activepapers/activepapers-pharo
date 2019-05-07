@@ -1,3 +1,6 @@
+"
+Tests for ${class:name=APActivePapers}$
+"
 Class {
 	#name : #APActivePaperTest,
 	#superclass : #TestCase,

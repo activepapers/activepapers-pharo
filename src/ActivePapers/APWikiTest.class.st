@@ -1,3 +1,7 @@
+"
+Tests for ${class:name=TAPWiki}$
+
+"
 Class {
 	#name : #APWikiTest,
 	#superclass : #TestCase,

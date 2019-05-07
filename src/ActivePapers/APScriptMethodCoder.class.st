@@ -1,7 +1,7 @@
 Class {
 	#name : #APScriptMethodCoder,
 	#superclass : #GtMethodCoder,
-	#category : #'ActivePapers-Workflow'
+	#category : #'ActivePapers-ComputationalDocument'
 }
 
 { #category : #executing }

@@ -1,3 +1,16 @@
+"
+!An adaptor for displaying Roassal graphics in GToolkit's Bloc universe 
+
+This class wraps an ${class:name=RTBuilder}$ in such a way that it is displayed reasonably well as a ${class:name=BlElement}$. A button for launching an inspector in the Morphic universe is added in order to make Roassal's interactive features easily accessible.
+
+Usage example:
+
+[[[
+APGraphics show:
+	RTGrapherScatterplotExample new exampleSeismDepthAndMag
+]]]
+
+"
 Class {
 	#name : #APGraphics,
 	#superclass : #Object,

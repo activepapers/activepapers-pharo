@@ -1,3 +1,6 @@
+"
+Example class used in ${class:name=APDataSlotTest}$
+"
 Class {
 	#name : #APDataPoint,
 	#superclass : #Object,

@@ -1,3 +1,6 @@
+"
+Tests for ${class:name=APDataSlot}$
+"
 Class {
 	#name : #APDataSlotTest,
 	#superclass : #TestCase,
