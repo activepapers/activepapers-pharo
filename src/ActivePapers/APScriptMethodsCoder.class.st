@@ -1,3 +1,8 @@
+"
+!A coder for the scripts in an ActivePaper
+
+Used in ${method:name=APActivePaper class>>#gtScriptsFor:}$.
+"
 Class {
 	#name : #APScriptMethodsCoder,
 	#superclass : #GtMethodsCoder,

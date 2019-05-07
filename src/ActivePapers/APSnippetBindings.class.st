@@ -6,7 +6,7 @@ A subclass of ${class:name=GtSnippetBindings}$ that provides access to the data 
 Class {
 	#name : #APSnippetBindings,
 	#superclass : #GtSnippetBindings,
-	#category : #'ActivePapers-ComputationalDocument'
+	#category : #'ActivePapers-Playground'
 }
 
 { #category : #binding }

@@ -8,7 +8,7 @@ Code snippets in an APPlayPage are represented by ${class:name=APCoderSnippet}$.
 Class {
 	#name : #APPlayPage,
 	#superclass : #GtPlayPage,
-	#category : #'ActivePapers-ComputationalDocument'
+	#category : #'ActivePapers-Playground'
 }
 
 { #category : #inspecting }

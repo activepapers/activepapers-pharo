@@ -6,7 +6,7 @@ When an ${class:name=APCoderSnippet}$ is converted to a script, it is replaced b
 Class {
 	#name : #APScriptSnippet,
 	#superclass : #GtExampleSnippet,
-	#category : #'ActivePapers-ComputationalDocument'
+	#category : #'ActivePapers-Playground'
 }
 
 { #category : #updating }

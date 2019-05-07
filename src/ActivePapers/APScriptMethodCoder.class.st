@@ -1,3 +1,6 @@
+"
+Coder for a single script inside an ${class:name=APScriptMethodsCoder}$
+"
 Class {
 	#name : #APScriptMethodCoder,
 	#superclass : #GtMethodCoder,

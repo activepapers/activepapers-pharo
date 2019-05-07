@@ -6,7 +6,7 @@ A modified version of ${class:name=GtCoderSnippet}$ for use by ${class:name=APPl
 Class {
 	#name : #APCoderSnippet,
 	#superclass : #GtCoderSnippet,
-	#category : #'ActivePapers-ComputationalDocument'
+	#category : #'ActivePapers-Playground'
 }
 
 { #category : #initialization }
