@@ -29,7 +29,7 @@ APDocumentation class >> wikiPageWiki [
 		text: 
 '!Wikis
 
-To add a documentation wiki to a Pharo class, it is sufficient to use the trait  ${class:name=TAPWiki|show=#gtDocumentFor:|expanded=}$. 
+To add a documentation wiki to a Pharo class, it is sufficient to use the trait  ${class:name=TAPWiki|show=#gtDocumentFor:}$. 
 
 For an example of a wikified class, see ${class:name=APDocumentation}$.
 
