@@ -94,8 +94,10 @@ InfluenzaLikeIllnessIncidenceInFrance class >> wikiPageVerification [
 
 One week in the dataset has missing data:
 [[[
-self data select:
-	[ :row | (row collect: #isNil) includes: true ]
+missingData := self data select:
+	[ :row | (row collect: #isNil) includes: true ].
+self assert: missingData size = 1.
+missingData
 ]]]
 
 Searching for gaps (week-to-week distances of more than seven days) in the week column after removing the missing data point yields exactly one gap corresponding to the missing data point, meaning that the dataset is otherwise complete:
@@ -107,6 +109,9 @@ weeks allButFirst with: weeks allButLast do:
 	[ :w2 :w1 |
 		(w2 - w1) = (Duration days: 7)
 			ifFalse: [ gaps add: { w2-w1. w1 . w2 } ] ].
+self assert: gaps size = 1.
+self assert: ((missingData column: ''week'') first
+					 - gaps first second) = (Duration days: 7).
 gaps
 ]]]
 
