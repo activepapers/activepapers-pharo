@@ -99,6 +99,12 @@ APActivePaper class >> boxAround: aBlElement [
 
 ]
 
+{ #category : #accessing }
+APActivePaper class >> data [
+	"A nicer API name for accessing the data-containing instance"
+	^ self uniqueInstance
+]
+
 { #category : #workflow }
 APActivePaper class >> dataSlotNames [
 	^ self dataSlots collect: #name.
