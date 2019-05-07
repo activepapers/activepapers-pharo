@@ -2,7 +2,7 @@
 
 The Pharo edition of [ActivePapers](https://www.activepapers.org/) focuses on the documentation and user interface aspects of communicating computational science. It is based on the [Glamorous Toolkit](https://gtoolkit.com/), an innovative development environment for [Pharo](http://pharo.org/).
 
-This package is very much work in progress. At this time, it does not support computation at all (but this will come soon). All there is for now is support for creating Wikis in Pharo classes. Such Wikis will be used for documenting reproducible computations in the near future.
+This package is work in progress. It is complete enough to produce computational documents, and it contains a realistic example (class `InfluenzaLikeIllnessInFrance`). However, there is not much protection against messing up such a document using incorrectly used or incompletely implemented editing operations. Also, persistence of the datasets in an ActivePaper is not yet implemented.
 
 To install in Pharo 7, execute the following lines in a playground:
 ```
