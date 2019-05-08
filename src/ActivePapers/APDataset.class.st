@@ -12,7 +12,7 @@ Class {
 		'value',
 		'timeStamp'
 	],
-	#category : #'ActivePapers-DataSlots'
+	#category : #'ActivePapers-Data Slots'
 }
 
 { #category : #inspecting }

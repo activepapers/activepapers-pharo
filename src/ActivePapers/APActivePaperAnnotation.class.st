@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'referencedClass'
 	],
-	#category : #'ActivePapers-ComputationalDocument'
+	#category : #'ActivePapers-Computational Document'
 }
 
 { #category : #accessing }

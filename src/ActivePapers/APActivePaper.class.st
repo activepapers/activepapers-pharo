@@ -50,7 +50,7 @@ Class {
 		'timeStamps',
 		'workflowView'
 	],
-	#category : #'ActivePapers-ComputationalDocument'
+	#category : #'ActivePapers-Computational Document'
 }
 
 { #category : #'instance variables' }
@@ -393,7 +393,7 @@ APActivePaper >> isValidDataset: aSymbol [
 
 { #category : #'data access' }
 APActivePaper >> readAccessToSlot: aSlot [
-	| slotName variables |
+	| slotName |
 	slotName := aSlot name.
 	self trackDynamicDependenciesOn: slotName.
 	self ensureDataset: slotName

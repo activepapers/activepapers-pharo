@@ -6,7 +6,7 @@ Used in ${method:name=APActivePaper class>>#gtScriptsFor:}$.
 Class {
 	#name : #APScriptMethodsCoder,
 	#superclass : #GtMethodsCoder,
-	#category : #'ActivePapers-ComputationalDocument'
+	#category : #'ActivePapers-Computational Document'
 }
 
 { #category : #'instance creation' }

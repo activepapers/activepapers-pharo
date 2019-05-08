@@ -4,7 +4,7 @@ Coder for a single script inside an ${class:name=APScriptMethodsCoder}$
 Class {
 	#name : #APScriptMethodCoder,
 	#superclass : #GtMethodCoder,
-	#category : #'ActivePapers-ComputationalDocument'
+	#category : #'ActivePapers-Computational Document'
 }
 
 { #category : #executing }

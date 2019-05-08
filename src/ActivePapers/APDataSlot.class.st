@@ -7,7 +7,7 @@ This is a modification of ${class:name=InstanceVariableSlot}$ that extends the m
 Class {
 	#name : #APDataSlot,
 	#superclass : #InstanceVariableSlot,
-	#category : #'ActivePapers-DataSlots'
+	#category : #'ActivePapers-Data Slots'
 }
 
 { #category : #'code generation' }
