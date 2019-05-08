@@ -9,16 +9,22 @@ Class {
 
 { #category : #executing }
 APScriptMethodCoder >> debugScript [
-	| compiledMethod breakpoint |
+	| compiledMethod context process debuggingSession |
 	self isModified
 		ifTrue: [ self save
 			ifFalse: [ ^ self ] ].
 	compiledMethod := self classOrMetaClass methodNamed: self selector.
-	breakpoint := Breakpoint new
-		node: compiledMethod ast body;
-		once;
-		install.
-	self playScript
+	context := [ compiledMethod valueWithReceiver: self classOrMetaClass uniqueInstance
+										arguments: #() ] asContext.
+	process := Process
+		forContext: context
+		priority: Processor userInterruptPriority.
+	debuggingSession := (process 
+		newDebugSessionNamed: 'test debugging'
+		startedAt: process suspendedContext).
+	10 timesRepeat: [ 
+		debuggingSession stepInto ].
+	GtExpandableDebuggerElement openInspectorOn: debuggingSession.
 ]
 
 { #category : #'initialize-release' }
