@@ -237,6 +237,12 @@ APActivePaper class >> scripts [
 ]
 
 { #category : #accessing }
+APActivePaper class >> title [
+	^ (self comment lineNumber: 1)
+		trimLeft: [ :char | '! ' includes: char ]
+]
+
+{ #category : #accessing }
 APActivePaper class >> wikiEvaluationReceiverForPage: aSymbol [
 	self isAbstract
 		ifTrue: [ ^ self ]
