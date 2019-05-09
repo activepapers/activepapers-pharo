@@ -13,4 +13,4 @@ Metacello new
 ```
 Note that this will also install the Glamorous Toolkit, which is a rather large package. Installation can thus take anything from 15 to 30 minutes.
 
-After installation, open a GToolkit playground (from the GToolkit menu), enter `APDocumentation`, and inspect it. This will open the main page of the Wiki documenting the ActivePapers Pharo edition.
+After installation, there will be an "ActivePapers" entry in the world menu. It gives access to the package's documentation and to all the ActivePapers available in the image (initially the examples).
