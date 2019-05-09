@@ -1,3 +1,6 @@
+"
+The ActivePapers world menu
+"
 Class {
 	#name : #APWorldMenu,
 	#superclass : #Object,
@@ -15,13 +18,11 @@ APWorldMenu class >> activePapersCatalogWorldMenuOn: aBuilder [
 		parent: #ActivePapers;
 		order: 0;
 		label: 'Documentation';
-		withSeparatorAfter;
 		action: [ GtInspector openOn: APDocumentation  ].
-	activePapers := APActivePaper subclasses sort: [ :a :b | a title < b title ].
-	activePapers do:
-		[ :each |
-			(aBuilder item: each name)
-				parent: #ActivePapers;
-				label: each title;
-				action: [ GtInspector openOn: each ] ].
+	(aBuilder item: #APCatalog)
+		parent: #ActivePapers;
+		order: 1;
+		label: 'ActivePapers catalog';
+		action: [ GtInspector openOn: APCatalog new ].
+
 ]
