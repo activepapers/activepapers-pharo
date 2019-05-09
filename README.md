@@ -13,4 +13,4 @@ Metacello new
 ```
 Note that this will also install the Glamorous Toolkit, which is a rather large package. Installation can thus take anything from 15 to 30 minutes.
 
-After installation, there will be an "ActivePapers" entry in the world menu. It gives access to the package's documentation and to all the ActivePapers available in the image (initially the examples).
+After installation, there will be an "ActivePapers" entry in the world menu. It gives access to the package's documentation and to a catalog of all the ActivePapers available in the image (initially the examples).
