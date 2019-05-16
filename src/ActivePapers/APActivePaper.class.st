@@ -7,7 +7,7 @@ Every instance variable of an ActivePaper is an ${class:name=APDataSlot}$ storin
 The following script creates a short example document for experimentation:
 
 [[[
-ap := APActivePaper name: #APActivePaperExample.
+ap := APActivePaper subclass: #APActivePaperExample.
 ap addInstVarNamed: 'x y'.
 ap compile: 'setX
 	<computes: #x>
@@ -169,19 +169,6 @@ APActivePaper class >> gtWorkflowViewFor: aView [
 { #category : #testing }
 APActivePaper class >> isAbstract [
 	^ self name == #APActivePaper
-]
-
-{ #category : #'instance creation' }
-APActivePaper class >> name: aSymbol [
-	| newClass |
-	self isAbstract
-		ifFalse: "self is a subclass of APActivePaper"
-			[ ^ self error: 'Instances are created using ''APActivePaper name: aSymbol''' ].
-	newClass := self subclass: aSymbol
-					  instanceVariableNames: ''
-					  classVariableNames: ''
-					  package: self package name.
-	^ newClass
 ]
 
 { #category : #'instance variables' }
