@@ -2,19 +2,14 @@ Extension { #name : #GtMethodCoder }
 
 { #category : #'*ActivePapers' }
 GtMethodCoder >> activePaperScriptAstFor: anAST [
-	<gtAstCoderAddOns: 1>
-"	Transcript crLog: 'activePaperScriptAstFor:'.
-	Transcript crLog: self classOrMetaClass name.
-	Transcript crLog: anAST methodNode printString.
-"	(self isActivePaperScript: anAST)
+	<gtAstCoderAddOns: 11>
+	(self isActivePaperScript: anAST)
 		ifFalse: [ 
-"			Transcript crLog: 'not an ActivePaper'.
-"			addOns removeContextAction: 'Play' translated.
+			addOns removeContextAction: 'Play' translated.
 			addOns removeContextAction: 'Play and Inspect' translated.
 			addOns removeContextAction: 'Debug' translated.
 			^ self ].
-"	Transcript crLog: 'adding ActivePaper actions'.
-"	addOns addContextAction: 'Play' translated
+	addOns addContextAction: 'Play' translated
 			 icon: BrGlamorousIcons play
 			 action: [ :button | self playActivePaperScriptFrom: button ].
 	addOns addContextAction: 'Play and Inspect' translated
