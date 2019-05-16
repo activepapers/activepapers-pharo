@@ -7,6 +7,7 @@ This package is work in progress. It is complete enough to produce computational
 To install in Pharo 7, execute the following lines in a playground:
 ```
 Metacello new
+    onConflictUseLoaded;
     baseline: 'ActivePapers';
     repository: 'github://activepapers/activepapers-pharo/src';
     load.
