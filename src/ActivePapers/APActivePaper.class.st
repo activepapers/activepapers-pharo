@@ -168,7 +168,7 @@ APActivePaper class >> gtWorkflowViewFor: aView [
 
 { #category : #testing }
 APActivePaper class >> isAbstract [
-	^ true
+	^ self name == #APActivePaper
 ]
 
 { #category : #'instance creation' }
@@ -181,8 +181,6 @@ APActivePaper class >> name: aSymbol [
 					  instanceVariableNames: ''
 					  classVariableNames: ''
 					  package: self package name.
-	newClass class compile: 'isAbstract ^ false'
-						classified: 'testing'.
 	^ newClass
 ]
 

@@ -44,10 +44,6 @@ Class {
 	#category : #ActivePapersExamples
 }
 
-{ #category : #testing }
-InfluenzaLikeIllnessIncidenceInFrance class >> isAbstract [ ^ false
-]
-
 { #category : #wikiPages }
 InfluenzaLikeIllnessIncidenceInFrance class >> wikiPageDataProcessing [
 	"This method was automatically generated."
