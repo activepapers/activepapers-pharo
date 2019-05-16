@@ -377,6 +377,16 @@ APActivePaper >> initialize [
 ]
 
 { #category : #'data access' }
+APActivePaper >> invalidateDataset: aSymbol [
+	timeStamps removeKey: aSymbol ifAbsent: [ nil ].
+	datasetDependencies keysAndValuesDo:
+	[ :ds :deps |
+		(deps includes: aSymbol)
+			ifTrue: [ self invalidateDataset: ds ] ]
+
+]
+
+{ #category : #'data access' }
 APActivePaper >> isValidDataset: aSymbol [
 	^ timeStamps includesKey: aSymbol.
 
@@ -441,6 +451,9 @@ APActivePaper >> workflowView: aView [
 
 { #category : #'data access' }
 APActivePaper >> writeAccessToSlot: aSlot [
-	self authorizeChangeOfDataset: aSlot name.
-	timeStamps at: aSlot name put: DateAndTime now.
+	| name |
+	name := aSlot name.
+	self authorizeChangeOfDataset: name.
+	self invalidateDataset: name.
+	timeStamps at: name put: DateAndTime now.
 ]

@@ -14,7 +14,7 @@ Class {
 { #category : #running }
 APActivePaperTest >> setUp [
 	EpMonitor current disable.
-	activePaper := APActivePaper name: #APActivePaperTestExample.
+	activePaper := APActivePaper subclass: #APActivePaperTestExample.
 	activePaperInstance := activePaper uniqueInstance.
 ]
 
@@ -44,9 +44,19 @@ APActivePaperTest >> testDependencyChain [
 	activePaper compile: 'setX <computes: #x> x := 1'.
 	activePaper compile: 'computeY <computes: #y> y := x + 1'.
 	activePaper compile: 'computeZ <computes: #z> z := y + 1'.
+
 	self assert: activePaperInstance x equals: 1.
 	self assert: activePaperInstance y equals: 2.
-	self assert: activePaperInstance z equals: 3
+	self assert: activePaperInstance z equals: 3.
+	self assert: (activePaperInstance isValidDataset: #x).
+	self assert: (activePaperInstance isValidDataset: #y).
+	self assert: (activePaperInstance isValidDataset: #z).
+	
+	activePaperInstance invalidateDataset: #y.
+	self assert: (activePaperInstance isValidDataset: #x).
+	self deny: (activePaperInstance isValidDataset: #y).
+	self deny: (activePaperInstance isValidDataset: #z).
+
 ]
 
 { #category : #testing }
