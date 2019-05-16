@@ -156,14 +156,22 @@ APActivePaper class >> gtScriptsFor: aView [
 { #category : #inspecting }
 APActivePaper class >> gtWorkflowViewFor: aView [
 	<gtView>
-	^ aView mondrian
+	| view |
+	view := aView explicit
 		title: 'Workflow' translated;
 		priority: -5;
-		painting:
-			[ :view |
-				self isAbstract ifFalse: [ self workflowViewFor: view ].
-				view layout custom: (GtGradVerticalDominanceTreeLayout new).
-				self uniqueInstance workflowView: view ]
+		stencil: [ | mondrian |
+						mondrian := GtMondrian new.
+						self workflowViewFor: mondrian.
+						mondrian layout custom: (GtGradVerticalDominanceTreeLayout new).
+						mondrian root ];
+		actionStencil: [ :aTab | 
+         BrButton new 
+            look: BrGlamorousButtonWithIconLook;
+            icon: BrGlamorousIcons refresh asElement;
+            action: [ aTab viewContentElement phlow update ] ].
+	self uniqueInstance workflowView: view.
+	^ view
 ]
 
 { #category : #testing }
