@@ -156,15 +156,34 @@ APActivePaper class >> gtScriptsFor: aView [
 { #category : #inspecting }
 APActivePaper class >> gtWorkflowViewFor: aView [
 	<gtView>
-	| view |
+	| view mondrian mondrianElement |
 	view := aView explicit
 		title: 'Workflow' translated;
 		priority: -5;
-		stencil: [ | mondrian |
-						mondrian := GtMondrian new.
-						self workflowViewFor: mondrian.
-						mondrian layout custom: (GtGradVerticalDominanceTreeLayout new).
-						mondrian root ];
+		stencil: [ mondrian := GtMondrian new.
+					  self workflowViewFor: mondrian.
+					  mondrian layout custom: (GtGradVerticalDominanceTreeLayout new).
+					  mondrianElement := mondrian asPannableElement ];
+		actionStencil: [ 
+			BrButton new 
+				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				icon: BrGlamorousIcons zoomin asElement ;
+				action: [ mondrianElement zoomIn ] ];
+		actionStencil: [ 
+			BrButton new 
+				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				icon: BrGlamorousIcons zoomout asElement ;
+				action: [ mondrianElement zoomOut ] ];
+		actionStencil: [ 
+			BrButton new
+				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				icon: BrGlamorousIcons actualsize asElement;
+				action: [ mondrianElement zoomToActualSize ] ];
+		actionStencil: [ 
+			BrButton new
+				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				icon: BrGlamorousIcons zoomtofit asElement;
+				action: [ mondrianElement zoomToFit ] ];
 		actionStencil: [ :aTab | 
          BrButton new 
             look: BrGlamorousButtonWithIconLook;
