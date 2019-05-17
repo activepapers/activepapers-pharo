@@ -380,9 +380,10 @@ APActivePaper >> datasetsComputedInCurrentContext [
 		  context ifNotNil:
 			[ context method pragmas
 					select: [ :p | p selector = #computes: ]
-					thenDo: [ :p | computedDatasets at: p arguments first ifAbsentPut: level ].
-			  context := context sender.
-			  level := level + 1 ] ].
+					thenDo: [ :p | computedDatasets at: p arguments first ifAbsentPut: level ]
+					ifNone: [ level := level - 1 ].
+			  level := level + 1.
+			  context := context sender ] ].
 	^ computedDatasets
 ]
 
