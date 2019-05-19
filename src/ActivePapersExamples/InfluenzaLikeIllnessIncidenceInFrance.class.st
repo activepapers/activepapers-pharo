@@ -65,7 +65,7 @@ ${method:name=InfluenzaLikeIllnessIncidenceInFrance>>#parseCsvFile|expanded=}$
 
 4. Download the descriptions of the individual fields (provided as a JSON schema)
 ${method:name=InfluenzaLikeIllnessIncidenceInFrance>>#downloadFieldDescriptions|expanded=}$
-5. Convert each column to the appropriate data type. The data type is taken from the field descriptions. All columns are either ==''integer''== or ==''string''==. There is a special treatment for column ==''week''== which is listed as ==''integer''==, but the integer is really a special encoding of an ISO-8601 week number. For the standrd ==''integer''== columns, illegal values are converted to ==nil==.
+5. Convert each column to the appropriate data type. The data type is taken from the field descriptions. All columns are either ==''integer''== or ==''string''==. There is a special treatment for column ==''week''== which is listed as ==''integer''==, but the integer is really a special encoding of an ISO-8601 week number. For the standard ==''integer''== columns, illegal values are converted to ==nil==.
 ${method:name=InfluenzaLikeIllnessIncidenceInFrance>>#convertDataTypes|expanded=}$
 
 6. Extract separate data frames for the absolute and the population-relative incidence estimations, removing missing data points. The resulting datasets are the most useful ones for analysis.
