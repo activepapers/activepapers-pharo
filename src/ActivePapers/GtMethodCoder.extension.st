@@ -4,11 +4,7 @@ Extension { #name : #GtMethodCoder }
 GtMethodCoder >> activePaperScriptAstFor: anAST [
 	<gtAstCoderAddOns: 11>
 	(self isActivePaperScript: anAST)
-		ifFalse: [ 
-			addOns removeContextAction: 'Play' translated.
-			addOns removeContextAction: 'Play and Inspect' translated.
-			addOns removeContextAction: 'Debug' translated.
-			^ self ].
+		ifFalse: [ ^ self ].
 	addOns addContextAction: 'Play' translated
 			 icon: BrGlamorousIcons play
 			 action: [ :button | self playActivePaperScriptFrom: button ].
