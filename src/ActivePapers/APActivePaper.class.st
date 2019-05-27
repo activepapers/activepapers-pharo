@@ -47,8 +47,7 @@ Class {
 	#classTraits : 'TAPWiki classTrait + TSingleton classTrait',
 	#instVars : [
 		'datasetDependencies',
-		'timeStamps',
-		'workflowView'
+		'timeStamps'
 	],
 	#category : #'ActivePapers-Computational Document'
 }
@@ -189,7 +188,6 @@ APActivePaper class >> gtWorkflowViewFor: aView [
             look: BrGlamorousButtonWithIconLook;
             icon: BrGlamorousIcons refresh asElement;
             action: [ aTab viewContentElement phlow update ] ].
-	self uniqueInstance workflowView: view.
 	^ view
 ]
 
@@ -357,7 +355,6 @@ APActivePaper >> authorizeChangeOfDataset: aSymbol [
 APActivePaper >> clearCachedState [
 	datasetDependencies := Dictionary new.
 	timeStamps := Dictionary new.
-	workflowView := nil.
 ]
 
 { #category : #dependencies }
@@ -464,17 +461,6 @@ APActivePaper >> trackDynamicDependenciesOn: aSymbol [
 { #category : #dependencies }
 APActivePaper >> updateWorkflowView [
 	"workflowView asElement phlow update" 
-]
-
-{ #category : #dependencies }
-APActivePaper >> workflowView [
-	self flag: 'for testing'.
-	^ workflowView
-]
-
-{ #category : #dependencies }
-APActivePaper >> workflowView: aView [
-	workflowView := aView
 ]
 
 { #category : #'data access' }
