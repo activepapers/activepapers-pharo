@@ -6,11 +6,14 @@ This package is work in progress. It is complete enough to produce computational
 
 To install in Pharo 7, execute the following lines in a playground:
 ```
+EpMonitor current disable.
+[ 
 Metacello new
-    onConflictUseLoaded;
     baseline: 'ActivePapers';
     repository: 'github://activepapers/activepapers-pharo/src';
+    onConflictUseLoaded;
     load.
+] ensure: [ EpMonitor current enable ].
 ```
 Note that this will also install the Glamorous Toolkit, which is a rather large package. Installation can thus take anything from 15 to 30 minutes.
 

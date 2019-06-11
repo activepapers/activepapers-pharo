@@ -17,8 +17,8 @@ BaselineOfActivePapers >> baseline: spec [
 	spec for: #common do: [
 
 		spec
-			baseline: 'GToolkit' 
-			with: [ spec repository: 'github://feenkcom/gtoolkit/src' ].
+			baseline: 'GToolkit'
+			with: [ spec repository: 'github://feenkcom/gtoolkit:release/src' ].
 		spec
 			baseline: 'SingletonTrait'
 			with: [ spec repository: 'github://khinsen/SingletonTrait' ].
