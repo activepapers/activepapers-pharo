@@ -155,40 +155,12 @@ APActivePaper class >> gtScriptsFor: aView [
 { #category : #inspecting }
 APActivePaper class >> gtWorkflowViewFor: aView [
 	<gtView>
-	| view mondrian mondrianElement |
-	view := aView explicit
+	^ aView mondrian
 		title: 'Workflow' translated;
 		priority: -5;
-		stencil: [ mondrian := GtMondrian new.
-					  self workflowViewFor: mondrian.
-					  mondrian layout custom: (GtGradVerticalDominanceTreeLayout new).
-					  mondrianElement := mondrian asPannableElement ];
-		actionStencil: [ 
-			BrButton new 
-				look: BrGlamorousButtonIconLook;
-				icon: BrGlamorousIcons zoomin asElement ;
-				action: [ mondrianElement zoomIn ] ];
-		actionStencil: [ 
-			BrButton new 
-				look: BrGlamorousButtonIconLook;
-				icon: BrGlamorousIcons zoomout asElement ;
-				action: [ mondrianElement zoomOut ] ];
-		actionStencil: [ 
-			BrButton new
-				look: BrGlamorousButtonIconLook;
-				icon: BrGlamorousIcons actualsize asElement;
-				action: [ mondrianElement zoomToActualSize ] ];
-		actionStencil: [ 
-			BrButton new
-				look: BrGlamorousButtonIconLook;
-				icon: BrGlamorousIcons zoomtofit asElement;
-				action: [ mondrianElement zoomToFit ] ];
-		actionStencil: [ :aTab | 
-         BrButton new 
-            look: BrGlamorousButtonWithIconLook;
-            icon: BrGlamorousIcons refresh asElement;
-            action: [ aTab viewContentElement phlow update ] ].
-	^ view
+		painting: [ :aMondrian |
+			self workflowViewFor: aMondrian.
+			aMondrian layout custom: (GtGradVerticalDominanceTreeLayout new) ]
 ]
 
 { #category : #testing }
