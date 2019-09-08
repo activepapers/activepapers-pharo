@@ -165,22 +165,22 @@ APActivePaper class >> gtWorkflowViewFor: aView [
 					  mondrianElement := mondrian asPannableElement ];
 		actionStencil: [ 
 			BrButton new 
-				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				look: BrGlamorousButtonIconLook;
 				icon: BrGlamorousIcons zoomin asElement ;
 				action: [ mondrianElement zoomIn ] ];
 		actionStencil: [ 
 			BrButton new 
-				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				look: BrGlamorousButtonIconLook;
 				icon: BrGlamorousIcons zoomout asElement ;
 				action: [ mondrianElement zoomOut ] ];
 		actionStencil: [ 
 			BrButton new
-				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				look: BrGlamorousButtonIconLook;
 				icon: BrGlamorousIcons actualsize asElement;
 				action: [ mondrianElement zoomToActualSize ] ];
 		actionStencil: [ 
 			BrButton new
-				look: BrGlamorousButtonExteriorRectangularLook + BrGlamorousButtonIconLook;
+				look: BrGlamorousButtonIconLook;
 				icon: BrGlamorousIcons zoomtofit asElement;
 				action: [ mondrianElement zoomToFit ] ];
 		actionStencil: [ :aTab | 
