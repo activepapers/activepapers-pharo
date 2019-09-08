@@ -15,5 +15,5 @@ GtMethodsCoder >> forActivePaper: anAPActivePaper [
 	dictionary, so we convert to a set to keep only unique entries."
 										asSet asArray.
 	scriptMethods sort: [ :a :b | a selector <= b selector ].
-	self forMethods: scriptMethods
+	self forItems: scriptMethods
 ]
