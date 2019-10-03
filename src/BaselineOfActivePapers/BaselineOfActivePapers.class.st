@@ -25,7 +25,7 @@ BaselineOfActivePapers >> baseline: spec [
 		spec
 			baseline: 'IPFS'
 			with: [ spec repository: 'github://khinsen/ipfs-pharo/src';
-							 load: #('IPFS' 'IPFS-GToolkit') ].
+							 loads: #('IPFS' 'IPFS-GToolkit') ].
 		spec
 			baseline: 'DataFrame'
 			with: [ spec repository: 'github://PolyMathOrg/DataFrame/src' ].
