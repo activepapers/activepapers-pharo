@@ -116,10 +116,10 @@ APWikiLinkAnnotation >> referencedPage [
 { #category : #subscriptions }
 APWikiLinkAnnotation >> registerToSystemChanges [
 	self gtDocument
-		subscribe: GtDocumentUpdateRequestedAnnouncement
-			send: #handleDocumentUpdateRequestedAnnouncement:
-			to: self
-			for: self gtSubscriber.
+		when: GtDocumentUpdateRequestedAnnouncement
+		send: #handleDocumentUpdateRequestedAnnouncement:
+		to: self
+		for: self gtSubscriber
 ]
 
 { #category : #'private - styling' }
