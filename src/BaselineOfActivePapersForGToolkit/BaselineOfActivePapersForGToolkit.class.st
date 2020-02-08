@@ -11,15 +11,11 @@ BaselineOfActivePapersForGToolkit >> baseline: spec [
 	spec for: #common do: [
 
 		spec
-			baseline: 'GToolkit'
-			with: [ spec repository: 'github://feenkcom/gtoolkit:release/src' ].
-		spec
 			baseline: 'SingletonTrait'
 			with: [ spec repository: 'github://khinsen/SingletonTrait' ].
 		spec
-			baseline: 'IPFS'
-			with: [ spec repository: 'github://khinsen/ipfs-pharo/src';
-							 loads: #('IPFS' 'IPFS-GToolkit') ].
+			baseline: 'IPFSForGToolkit'
+			with: [ spec repository: 'github://khinsen/ipfs-pharo/src' ].
 		spec
 			baseline: 'DataFrame'
 			with: [ spec repository: 'github://PolyMathOrg/DataFrame/src' ].
@@ -32,13 +28,12 @@ BaselineOfActivePapersForGToolkit >> baseline: spec [
 
 		spec
 			package: 'ActivePapers'
-			with: [ spec requires: #('GToolkit' 'SingletonTrait' 'IPFS')];
+			with: [ spec requires: #('SingletonTrait' 'IPFSForGToolkit')];
 			package: 'ActivePapersExamples'
 			with: [ spec requires: #('ActivePapers' 'DataFrame' 'PolyMath' 'Roassal2')];
-			package: 'BaselineOfActivePapers'.
+			package: 'BaselineOfActivePapersForGToolkit'.
 
 ]
-
 ]
 
 { #category : #baseline }
