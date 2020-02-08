@@ -4,7 +4,26 @@ The Pharo edition of [ActivePapers](https://www.activepapers.org/) focuses on th
 
 This package is work in progress. It is complete enough to produce computational documents, and it contains a realistic example (class `InfluenzaLikeIllnessInFrance`). However, there is not much protection against messing up such a document using incorrectly used or incompletely implemented editing operations. Also, persistence of the datasets in an ActivePaper is not yet implemented.
 
-To install in Pharo 7, execute the following lines in a playground:
+
+## Installation in a pre-built GToolkit distribution (recommended)
+
+Download GToolkit for your platform from [this site](https://gtoolkit.com/install/). Open a playground and  execute the following lines:
+
+```
+EpMonitor current disable.
+[ 
+Metacello new
+    baseline: 'ActivePapersForGToolkit';
+    repository: 'github://activepapers/activepapers-pharo/src';
+    onConflictUseLoaded;
+    load.
+] ensure: [ EpMonitor current enable ].
+```
+
+## Installation in a plain Pharo 8 image
+
+Execute the following lines in a playground:
+
 ```
 EpMonitor current disable.
 [ 
