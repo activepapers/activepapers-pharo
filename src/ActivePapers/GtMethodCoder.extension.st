@@ -1,19 +1,19 @@
 Extension { #name : #GtMethodCoder }
 
 { #category : #'*ActivePapers' }
-GtMethodCoder >> activePaperScriptAstFor: anAST [
+GtMethodCoder >> activePaperScriptAstFor: anAST into: coderAddOns [
 	<gtAstCoderAddOns: 11>
 	(self isActivePaperScript: anAST)
 		ifFalse: [ ^ self ].
-	addOns addContextAction: 'Play' translated
+	coderAddOns addContextAction: 'Play' translated
 			 icon: BrGlamorousIcons play
 			 action: [ :button | self playActivePaperScriptFrom: button ].
-	addOns addContextAction: 'Play and Inspect' translated
+	coderAddOns addContextAction: 'Play and Inspect' translated
 			 icon: BrGlamorousIcons playinspect
 			 action: [ :button | self playAndInspectActivePaperScriptFrom: button ].
-	addOns addContextAction: 'Debug' translated
+	coderAddOns addContextAction: 'Debug' translated
 			 icon: BrGlamorousIcons debug
-			 action: [ :button | self debugActivePaperScript ].
+     			 action: [ :button | self debugActivePaperScript ].
 ]
 
 { #category : #'*ActivePapers' }
