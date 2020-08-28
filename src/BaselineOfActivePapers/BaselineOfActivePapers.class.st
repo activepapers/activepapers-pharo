@@ -15,36 +15,44 @@ BaselineOfActivePapers >> baseline: spec [
 	<baseline>
 	
 	spec for: #common do: [
+		spec
+			baseline: 'DataFrame' with: [ spec repository: 'github://PolyMathOrg/DataFrame/src' ];
+			baseline: 'PolyMath' with: [ spec repository: 'github://PolyMathOrg/PolyMath/src' ];
+			baseline: 'Roassal2' with: [ spec repository: 'github://ObjectProfile/Roassal2/src' ];
+			baseline: 'SingletonTrait' with: [ spec repository: 'github://khinsen/SingletonTrait' ].
+		
+		spec
+			package: 'ActivePapers' with: [ spec requires: #('SingletonTrait')];
+			package: 'ActivePapersExamples' with: [ spec requires: #('ActivePapers' 'DataFrame' 'PolyMath' 'Roassal2')] ].
 
+	spec for: #gtoolkit do: [
 		spec
-			baseline: 'GToolkit'
-			with: [ spec repository: 'github://feenkcom/gtoolkit:release/src' ].
+			baseline: 'IPFSForGToolkit'
+			with: [ spec repository: 'github://khinsen/ipfs-pharo/src' ].
 		spec
-			baseline: 'SingletonTrait'
-			with: [ spec repository: 'github://khinsen/SingletonTrait' ].
-		spec
-			baseline: 'IPFS'
-			with: [ spec repository: 'github://khinsen/ipfs-pharo/src';
-							 loads: #('IPFS' 'IPFS-GToolkit') ].
-		spec
-			baseline: 'DataFrame'
-			with: [ spec repository: 'github://PolyMathOrg/DataFrame/src' ].
-		spec
-			baseline: 'PolyMath'
-			with: [ spec repository: 'github://PolyMathOrg/PolyMath/src' ].
-		spec
-			baseline: 'Roassal2' 
-			with: [ spec repository: 'github://ObjectProfile/Roassal2/src' ].
+			package: 'ActivePapers' with: [ spec requires: #('IPFSForGToolkit')] ].
 
+	spec for: #'non-gtoolkit' do: [
 		spec
-			package: 'ActivePapers'
-			with: [ spec requires: #('GToolkit' 'SingletonTrait' 'IPFS')];
-			package: 'ActivePapersExamples'
-			with: [ spec requires: #('ActivePapers' 'DataFrame' 'PolyMath' 'Roassal2')];
-			package: 'BaselineOfActivePapers'.
+			baseline: 'GToolkit' with: [ spec repository: 'github://feenkcom/gtoolkit:release/src' ];
+			baseline: 'IPFS' with: [ spec 
+				repository: 'github://khinsen/ipfs-pharo/src';
+				loads: #('IPFS' 'IPFS-GToolkit') ].
+		spec
+			package: 'ActivePapers' with: [ spec requires: #('GToolkit' 'IPFS')] ].
 
 ]
 
+{ #category : #accessing }
+BaselineOfActivePapers >> customProjectAttributes [
+	^ self isGTImage
+			ifTrue: [ #(gtoolkit) ]
+			ifFalse: [ #(non-gtoolkit) ]
+]
+
+{ #category : #testing }
+BaselineOfActivePapers >> isGTImage [
+	^ Smalltalk globals hasClassNamed: #GtCoder
 ]
 
 { #category : #baseline }
