@@ -70,6 +70,11 @@ APWikiPageStorageStrategy >> rootDirectory [
 ]
 
 { #category : #actions }
+APWikiPageStorageStrategy >> save: aGtDocument [
+	self store: aGtDocument
+]
+
+{ #category : #actions }
 APWikiPageStorageStrategy >> store: aGtDocument [
 	| text |
 	self 

@@ -35,7 +35,7 @@ TAPWiki classSide >> gtPagesFor: aView [
 		title: 'Pages' translated;
 		priority: -9;
 		items: [ self wikiPageNames collect: [ :pn | self wikiPageNamed: pn ] ];
-		itemFormat: [ :page | page name ]
+		itemText: [ :page | page name ]
 ]
 
 { #category : #testing }

@@ -22,7 +22,8 @@ BaselineOfActivePapers >> baseline: spec [
 			baseline: 'SingletonTrait' with: [ spec repository: 'github://khinsen/SingletonTrait' ].
 		
 		spec
-			package: 'ActivePapers' with: [ spec requires: #('SingletonTrait')];
+			package: 'ActivePapers' with: [ spec requires: #('ActivePapers-Wiki' 'SingletonTrait')];
+			package: 'ActivePapers-Wiki';
 			package: 'ActivePapersExamples' with: [ spec requires: #('ActivePapers' 'DataFrame' 'PolyMath' 'Roassal2')] ].
 
 	spec for: #gtoolkit do: [
