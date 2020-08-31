@@ -14,16 +14,52 @@ For a small but complete use case, see ${activePaper:name=InfluenzaLikeIllnessIn
 Class {
 	#name : #APDocumentation,
 	#superclass : #Object,
-	#traits : 'TAPWiki',
-	#classTraits : 'TAPWiki classTrait',
+	#traits : 'TWkClassWiki',
+	#classTraits : 'TWkClassWiki classTrait',
 	#category : #'ActivePapers-Documentation'
 }
+
+{ #category : #accessing }
+APDocumentation class >> createOrRetrieveWikiPageNamed: aSymbol [
+	|  pageName |
+	pageName := self normalizeWikiPageName: aSymbol. 
+	^ (self wikiPageNamed: name)
+		ifNil: [ ^ (WkWikiPage wiki: self name: pageName text: self initialWikiPageContents) store ]
+
+]
+
+{ #category : #inspecting }
+APDocumentation class >> gtMainPageFor: aView [
+	<gtView>
+	| aDocument |
+	aDocument := GtDocument new
+							strategy: (WkWikiPageStorageStrategy new container: self; name: #Main);
+							read.
+	^ (aDocument gtTextFor: aView)
+		title: 'Main page';
+		priority: -10;
+		action: [ :anAction | 
+			aDocument gtSaveActionFor: anAction ];
+		action: [ :anAction | 
+			aDocument gtShowMarkupActionFor: anAction ]
+]
+
+{ #category : #accessing }
+APDocumentation class >> wikiPageNamed: aSymbol [
+	|  pageName |
+	pageName := self normalizeWikiPageName: aSymbol. 
+	pageName = #Main
+		ifTrue: [ ^ WkWikiPage wiki: self name: pageName text: self comment ].
+	^ [ self perform: (self methodSelectorForWikiPageNamed: pageName) ]
+		on: MessageNotUnderstood do: [ nil ]
+		
+]
 
 { #category : #wikiPages }
 APDocumentation class >> wikiPageWiki [
 	"This method was automatically generated."
 	<wikiPage: #Wiki>
-	^APWikiPage
+	^WkWikiPage
 		wiki: self
 		name: #Wiki
 		text: 
@@ -41,7 +77,7 @@ See ${wikiPage:name=WikiImplementation}$ for an explanation of how the wiki is i
 APDocumentation class >> wikiPageWikiImplementation [
 	"This method was automatically generated."
 	<wikiPage: #WikiImplementation>
-	^APWikiPage
+	^WkWikiPage
 		wiki: self
 		name: #WikiImplementation
 		text: 

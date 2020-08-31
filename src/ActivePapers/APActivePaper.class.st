@@ -43,8 +43,8 @@ APActivePaperExample removeFromSystem.
 Class {
 	#name : #APActivePaper,
 	#superclass : #Object,
-	#traits : 'TAPWiki + TSingleton',
-	#classTraits : 'TAPWiki classTrait + TSingleton classTrait',
+	#traits : 'TWkClassWiki + TSingleton',
+	#classTraits : 'TWkClassWiki classTrait + TSingleton classTrait',
 	#instVars : [
 		'datasetDependencies',
 		'timeStamps'
@@ -99,6 +99,15 @@ APActivePaper class >> boxAround: aBlElement [
 ]
 
 { #category : #accessing }
+APActivePaper class >> createOrRetrieveWikiPageNamed: aSymbol [
+	|  pageName |
+	pageName := self normalizeWikiPageName: aSymbol. 
+	^ (self wikiPageNamed: name)
+		ifNil: [ ^ (WkWikiPage wiki: self name: pageName text: self initialWikiPageContents) store ]
+
+]
+
+{ #category : #accessing }
 APActivePaper class >> data [
 	"A nicer API name for accessing the data-containing instance"
 	^ self uniqueInstance
@@ -141,6 +150,22 @@ APActivePaper class >> gtActionPlayPageFor: anAction [
 					object: (APPlayPage forObject: self uniqueInstance);
 					sourceElement: aButton) ].
 
+]
+
+{ #category : #inspecting }
+APActivePaper class >> gtMainPageFor: aView [
+	<gtView>
+	| aDocument |
+	aDocument := GtDocument new
+							strategy: (WkWikiPageStorageStrategy new container: self; name: #Main);
+							read.
+	^ (aDocument gtTextFor: aView)
+		title: 'Main page';
+		priority: -10;
+		action: [ :anAction | 
+			aDocument gtSaveActionFor: anAction ];
+		action: [ :anAction | 
+			aDocument gtShowMarkupActionFor: anAction ]
 ]
 
 { #category : #inspecting }
@@ -229,6 +254,17 @@ APActivePaper class >> wikiEvaluationReceiverForPage: aSymbol [
 	self isAbstract
 		ifTrue: [ ^ self ]
 		ifFalse: [ ^ self uniqueInstance ]
+]
+
+{ #category : #accessing }
+APActivePaper class >> wikiPageNamed: aSymbol [
+	|  pageName |
+	pageName := self normalizeWikiPageName: aSymbol. 
+	pageName = #Main
+		ifTrue: [ ^ WkWikiPage wiki: self name: pageName text: self comment ].
+	^ [ self perform: (self methodSelectorForWikiPageNamed: pageName) ]
+		on: MessageNotUnderstood do: [ nil ]
+		
 ]
 
 { #category : #inspecting }

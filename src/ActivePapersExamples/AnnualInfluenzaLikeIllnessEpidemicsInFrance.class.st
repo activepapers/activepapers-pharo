@@ -53,7 +53,7 @@ Class {
 AnnualInfluenzaLikeIllnessEpidemicsInFrance class >> wikiPageVerification [
 	"This method was automatically generated."
 	<wikiPage: #Verification>
-	^APWikiPage
+	^WkWikiPage
 		wiki: self
 		name: #Verification
 		text: 

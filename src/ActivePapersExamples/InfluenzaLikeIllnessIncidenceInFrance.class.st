@@ -48,7 +48,7 @@ Class {
 InfluenzaLikeIllnessIncidenceInFrance class >> wikiPageDataProcessing [
 	"This method was automatically generated."
 	<wikiPage: #DataProcessing>
-	^APWikiPage
+	^WkWikiPage
 		wiki: self
 		name: #DataProcessing
 		text: 
@@ -80,7 +80,7 @@ ${method:name=InfluenzaLikeIllnessIncidenceInFrance>>#extractIncidenceData|expan
 InfluenzaLikeIllnessIncidenceInFrance class >> wikiPageVerification [
 	"This method was automatically generated."
 	<wikiPage: #Verification>
-	^APWikiPage
+	^WkWikiPage
 		wiki: self
 		name: #Verification
 		text: 

@@ -15,10 +15,10 @@ Class {
 APWikiTest >> setUp [
 	EpMonitor current disable.
 	wiki := Object subclass: #APWikiTestExample
-						uses: TAPWiki
+						uses: TWkClassWiki
 						instanceVariableNames: ''
 						classVariableNames: ''
-						package: TAPWiki package name.
+						package: TWkClassWiki package name.
 ]
 
 { #category : #running }
