@@ -31,6 +31,7 @@ TAPWiki classSide >> gtMainPageFor: aView [
 { #category : #inspecting }
 TAPWiki classSide >> gtPagesFor: aView [
 	<gtView>
+	<gtClassView>
 	^ aView list
 		title: 'Pages' translated;
 		priority: -9;
