@@ -105,23 +105,6 @@ APActivePaperAnnotation >> referencedClass [
 			defaultValue: [ nil ] ]
 ]
 
-{ #category : #subscriptions }
-APActivePaperAnnotation >> registerToSystemChanges [
-	self gtDocument
-		subscribe: ClassAdded, ClassRemoved
-			send: #handleClassAddedOrRemovedAnnouncement:
-			to: self
-			for: self gtSubscriber;
-		subscribe: ClassRenamed
-			send: #handleClassRenamedAnnouncement:
-			to: self
-			for: self gtSubscriber;
-		subscribe: GtDocumentUpdateRequestedAnnouncement
-			send: #handleDocumentUpdateRequestedAnnouncement:
-			to: self
-			for: self gtSubscriber.
-]
-
 { #category : #'api - style' }
 APActivePaperAnnotation >> styleTextWithMarkup: aBlRope [
 	super styleTextWithMarkup: aBlRope.
@@ -132,8 +115,7 @@ APActivePaperAnnotation >> styleTextWithMarkup: aBlRope [
 				name: self referencedClass;
 				spawnObject: self referencedClass realClass;
 				linkButton ].
-	self styleExpandingPreviewInText: aBlRope.
-	self registerToSystemChanges
+	self styleExpandingPreviewInText: aBlRope
 ]
 
 { #category : #'api - style' }

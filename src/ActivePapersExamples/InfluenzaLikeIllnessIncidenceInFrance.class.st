@@ -48,11 +48,7 @@ Class {
 InfluenzaLikeIllnessIncidenceInFrance class >> wikiPageDataProcessing [
 	"This method was automatically generated."
 	<wikiPage: #DataProcessing>
-	^WkWikiPage
-		wiki: self
-		name: #DataProcessing
-		text: 
-'!Data processing steps
+	^ '!Data processing steps
 
 1. Set the URL for downloading the data
 ${method:name=InfluenzaLikeIllnessIncidenceInFrance>>#setDownloadUrl|expanded=}$
@@ -80,11 +76,7 @@ ${method:name=InfluenzaLikeIllnessIncidenceInFrance>>#extractIncidenceData|expan
 InfluenzaLikeIllnessIncidenceInFrance class >> wikiPageVerification [
 	"This method was automatically generated."
 	<wikiPage: #Verification>
-	^WkWikiPage
-		wiki: self
-		name: #Verification
-		text: 
-'!Verification
+	^ '!Verification
 
 !!Completeness
 

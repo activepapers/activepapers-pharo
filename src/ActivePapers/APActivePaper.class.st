@@ -1,7 +1,7 @@
 "
 !ActivePaper
 
-An ActivePaper is a computational document combining a workflow (a collection of scripts and datasets) with a documentation layer provided by ${class:name=TAPWiki}$.
+An ActivePaper is a computational document combining a workflow (a collection of scripts and datasets) with a documentation layer provided by ${class:name=TWkClassWiki}$.
 
 Every instance variable of an ActivePaper is an ${class:name=APDataSlot}$ storing a dataset. Each such dataset is computed by one (and only one) script. Scripts are methods that contain pragmas of the form ==<computes: #x>== to signal that they compute dataset ==x==.
 The following script creates a short example document for experimentation:
@@ -99,15 +99,6 @@ APActivePaper class >> boxAround: aBlElement [
 ]
 
 { #category : #accessing }
-APActivePaper class >> createOrRetrieveWikiPageNamed: aSymbol [
-	|  pageName |
-	pageName := self normalizeWikiPageName: aSymbol. 
-	^ (self wikiPageNamed: name)
-		ifNil: [ ^ (WkWikiPage wiki: self name: pageName text: self initialWikiPageContents) store ]
-
-]
-
-{ #category : #accessing }
 APActivePaper class >> data [
 	"A nicer API name for accessing the data-containing instance"
 	^ self uniqueInstance
@@ -150,22 +141,6 @@ APActivePaper class >> gtActionPlayPageFor: anAction [
 					object: (APPlayPage forObject: self uniqueInstance);
 					sourceElement: aButton) ].
 
-]
-
-{ #category : #inspecting }
-APActivePaper class >> gtMainPageFor: aView [
-	<gtView>
-	| aDocument |
-	aDocument := GtDocument new
-							strategy: (WkWikiPageStorageStrategy new container: self; name: #Main);
-							read.
-	^ (aDocument gtTextFor: aView)
-		title: 'Main page';
-		priority: -10;
-		action: [ :anAction | 
-			aDocument gtSaveActionFor: anAction ];
-		action: [ :anAction | 
-			aDocument gtShowMarkupActionFor: anAction ]
 ]
 
 { #category : #inspecting }
@@ -254,17 +229,6 @@ APActivePaper class >> wikiEvaluationReceiverForPage: aSymbol [
 	self isAbstract
 		ifTrue: [ ^ self ]
 		ifFalse: [ ^ self uniqueInstance ]
-]
-
-{ #category : #accessing }
-APActivePaper class >> wikiPageNamed: aSymbol [
-	|  pageName |
-	pageName := self normalizeWikiPageName: aSymbol. 
-	pageName = #Main
-		ifTrue: [ ^ WkWikiPage wiki: self name: pageName text: self comment ].
-	^ [ self perform: (self methodSelectorForWikiPageNamed: pageName) ]
-		on: MessageNotUnderstood do: [ nil ]
-		
 ]
 
 { #category : #inspecting }

@@ -19,10 +19,11 @@ BaselineOfActivePapers >> baseline: spec [
 			baseline: 'DataFrame' with: [ spec repository: 'github://PolyMathOrg/DataFrame/src' ];
 			baseline: 'PolyMath' with: [ spec repository: 'github://PolyMathOrg/PolyMath/src' ];
 			baseline: 'Roassal2' with: [ spec repository: 'github://ObjectProfile/Roassal2/src' ];
-			baseline: 'SingletonTrait' with: [ spec repository: 'github://khinsen/SingletonTrait' ].
-		
+			baseline: 'SingletonTrait' with: [ spec repository: 'github://khinsen/SingletonTrait' ];
+			baseline: 'WikiForGToolkit' with: [ spec repository: 'github://khinsen/WikiForGToolkit' ].
+
 		spec
-			package: 'ActivePapers' with: [ spec requires: #('ActivePapers-Wiki' 'SingletonTrait')];
+			package: 'ActivePapers' with: [ spec requires: #('ActivePapers-Wiki' 'SingletonTrait' 'WikiForGToolkit')];
 			package: 'ActivePapers-Wiki';
 			package: 'ActivePapersExamples' with: [ spec requires: #('ActivePapers' 'DataFrame' 'PolyMath' 'Roassal2')] ].
 
