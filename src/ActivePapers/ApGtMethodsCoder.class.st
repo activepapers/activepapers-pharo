@@ -1,14 +1,18 @@
-Extension { #name : #GtMethodsCoder }
+Class {
+	#name : #ApGtMethodsCoder,
+	#superclass : #Object,
+	#category : #ActivePapers
+}
 
-{ #category : #'*ActivePapers' }
-GtMethodsCoder class >> forActivePaper: anAPActivePaper [
+{ #category : #'as yet unclassified' }
+ApGtMethodsCoder class >> forActivePaper: anAPActivePaper [
 	^ self new
 		forActivePaper: anAPActivePaper;
 		yourself
 ]
 
-{ #category : #'*ActivePapers' }
-GtMethodsCoder >> forActivePaper: anAPActivePaper [
+{ #category : #'as yet unclassified' }
+ApGtMethodsCoder >> forActivePaper: anAPActivePaper [
 	| scriptMethods |
 	scriptMethods := anAPActivePaper scripts values
 	"Scripts that compute multiple datasets appear more than once in the

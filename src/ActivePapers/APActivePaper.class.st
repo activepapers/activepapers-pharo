@@ -149,7 +149,7 @@ APActivePaper class >> gtScriptsFor: aView [
 	^ aView explicit
 		title: 'Scripts' translated;
 		priority: -3;
-		stencil: [ (GtMethodsCoder forActivePaper: self) asElement ]
+		stencil: [ (ApGtMethodsCoder forActivePaper: self) asElement ]
 ]
 
 { #category : #inspecting }

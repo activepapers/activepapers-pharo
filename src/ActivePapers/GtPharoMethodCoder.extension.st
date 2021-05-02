@@ -1,7 +1,7 @@
-Extension { #name : #GtMethodCoder }
+Extension { #name : #GtPharoMethodCoder }
 
 { #category : #'*ActivePapers' }
-GtMethodCoder >> activePaperScriptAstFor: anAST into: coderAddOns [
+GtPharoMethodCoder >> activePaperScriptAstFor: anAST into: coderAddOns [
 	<gtAstCoderAddOns: 11>
 	(self isActivePaperScript: anAST)
 		ifFalse: [ ^ self ].
@@ -17,7 +17,7 @@ GtMethodCoder >> activePaperScriptAstFor: anAST into: coderAddOns [
 ]
 
 { #category : #'*ActivePapers' }
-GtMethodCoder >> debugActivePaperScript [
+GtPharoMethodCoder >> debugActivePaperScript [
 	| compiledMethod context process debuggingSession |
 	self isModified
 		ifTrue: [ self save
@@ -37,23 +37,27 @@ GtMethodCoder >> debugActivePaperScript [
 ]
 
 { #category : #'*ActivePapers' }
-GtMethodCoder >> isActivePaperScript: anAST [
+GtPharoMethodCoder >> isActivePaperScript: anAST [
 	| node |
-	(self classOrMetaClass inheritsFrom: APActivePaper)
+	(self behavior inheritsFrom: APActivePaper)
 		ifFalse: [ ^ false ].
-"	Transcript crLog: 'inherits from APActivePaper'.
-"	anAST ifNil: [ ^ false ].
-"	Transcript crLog: 'AST is non-nil'.
-"	node := anAST methodNode.
+	"	Transcript crLog: 'inherits from APActivePaper'.
+"
+	anAST ifNil: [ ^ false ].
+	"	Transcript crLog: 'AST is non-nil'.
+"
+	node := anAST methodNode.
 	node ifNil: [ ^ false ].
-"	Transcript crLog: 'AST method node is non-nil'.
-"	node arguments ifNotEmpty: [ ^ false ].
-"	Transcript crLog: 'method is unary'.
-"	^ node pragmas anySatisfy: [ :each | each selector = #computes: ].
+	"	Transcript crLog: 'AST method node is non-nil'.
+"
+	node arguments ifNotEmpty: [ ^ false ].
+	"	Transcript crLog: 'method is unary'.
+"
+	^ node pragmas anySatisfy: [ :each | each selector = #computes: ]
 ]
 
 { #category : #'*ActivePapers' }
-GtMethodCoder >> playActivePaperScriptFrom: anElement [
+GtPharoMethodCoder >> playActivePaperScriptFrom: anElement [
 	self isModified
 		ifTrue: [ self save
 				ifFalse: [ ^ self ] ].
@@ -61,7 +65,7 @@ GtMethodCoder >> playActivePaperScriptFrom: anElement [
 ]
 
 { #category : #'*ActivePapers' }
-GtMethodCoder >> playAndInspectActivePaperScriptFrom: anElement [
+GtPharoMethodCoder >> playAndInspectActivePaperScriptFrom: anElement [
 	| compiledMethod datasetNames datasets |
 	self playActivePaperScriptFrom: anElement.
 	compiledMethod := self classOrMetaClass methodNamed: self selector.
